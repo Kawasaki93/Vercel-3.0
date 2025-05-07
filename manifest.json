@@ -1,16 +1,17 @@
 {
-  "name": "Playa Juan vercel",
-  "short_name": "Playa Juan v2.0",
-  "description": "Una descripción de la PWA",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "/",
+  "name": "Playa Juan",
+  "short_name": "PlayaJuan",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff"
+  "theme_color": "#4CAF50",
+  "orientation": "portrait",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
 }
