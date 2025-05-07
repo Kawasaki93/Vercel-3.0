@@ -1,0 +1,706 @@
+@charset "UTF-8";
+/* line 2, ../scss/sunapp.scss */
+* {
+  touch-action: manipulation;
+}
+
+/* line 6, ../scss/sunapp.scss */
+.beach_wrapper {
+  width: 83%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns:100px 100px 100px 100px 100px 150px 100px 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 130px 130px 130px 130px 130px 130px 130px 130px 450px 130px 130px 130px 130px 130px 130px 130px;
+  gap: 0px 0px;
+  float: right;
+}
+
+/* line 16, ../scss/sunapp.scss */
+body {
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  transform-origin: top left;
+  font-family: Tahoma, sans-serif;
+  background: #CEEFF1;
+  margin-left: -210px;
+  margin-right: auto;
+  margin-top:30px;
+  touch-action: manipulation;
+  font-size: 40px;
+  text-align: center;
+}
+
+/* line 30, ../scss/sunapp.scss */
+* {
+  touch-action: manipulation;
+}
+
+/* line 34, ../scss/sunapp.scss */
+.left_panel {
+  width: 0%;
+  float: right;
+  margin-right:-1500px;
+}
+
+/* line 41, ../scss/sunapp.scss */
+.header {
+  /*no funciona */
+  display: inline-block;
+  align-items: center;
+}
+
+/* line 47, ../scss/sunapp.scss */
+.zoom {
+  zoom: 20%;
+}
+
+/* line 51, ../scss/sunapp.scss */
+.sunbed {
+  width: 70px;
+  height: 40px;
+  border: 2px solid;
+  color: orange;
+  -webkit-text-stroke: 0.4px white;
+  border-color: black;
+  background: green;
+  text-align: center;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 29px;
+  margin-left: 120px;
+  margin-top: 15px;
+  position: relative;
+  font-weight: 800; /* Equivale a bold */
+  user-select:none;
+}
+
+/* CLON 1 ORIGINAL  */
+.sunbed:nth-of-type(1) {
+  background: orange;
+  visibility:hidden;
+}
+
+/* line 71, ../scss/sunapp.scss */
+.sunbed .sunbed_name {
+  color: black;
+}
+
+/* line 75, ../scss/sunapp.scss */
+.sunbed.step1 {
+  background: LightSeaGreen;
+  /*ocupado*/
+}
+
+/* line 80, ../scss/sunapp.scss */
+.sunbed.step2 {
+  background: red;
+  /*pagado*/
+}
+
+/* line 85, ../scss/sunapp.scss */
+.sunbed.step3 {
+  background: linear-gradient(to left, LightSeaGreen 50%, DarkCyan 50%);
+  /*ocupado con 3 hamacas cada lado*/
+}
+
+/* line 90, ../scss/sunapp.scss */
+.sunbed.step4 {
+  background: linear-gradient(to left, LightSeaGreen 50%, green 50%);
+  /*ocupado 1 persona sola*/
+}
+
+/* line 96, ../scss/sunapp.scss */
+.sunbed.step5 {
+  background: orange;
+  /*hamaca off*/
+}
+
+/* line 102, ../scss/sunapp.scss */
+.sunbed.step6 {
+  background: green;
+}
+
+.form {
+  margin-top:8px;
+  }
+/* line 106, ../scss/sunapp.scss */
+.form input {
+  background-color: #BCE5E7;
+  border: none;
+  border-bottom: 1px solid green;
+  text-align: center;
+  zoom: 100%;
+  touch-action: none;
+  colour:black;
+  -webkit-text-stroke: 0px white;
+}
+
+/* line 117, ../scss/sunapp.scss */
+.shopping_cat_value {
+  font-size: 80px;
+}
+
+/*GRUPOS DE HAMACAS------------- */
+.especiales {
+  background: orange;
+}
+
+.intocables {
+  background: magenta;
+  
+  
+}
+/*GRUPOS DE HAMACAS------------- */
+.desconectadosgeneral {
+  visibility: hidden;
+}
+.desconectadosfila1 {
+  visibility: hidden;
+}
+.desconectadosfila2 {
+  visibility: hidden;
+}
+.desconectadosfila3 {
+  visibility: hidden;
+}
+.desconectadosfila4 {
+  visibility: hidden;
+}
+.desconectadosfila5 {
+  visibility: hidden;
+}
+.desconectadosfila6 {
+  visibility: hidden;
+}
+.desconectadosfila7 {
+  visibility: hidden;
+}
+.desconectadosfila8 {
+  visibility: hidden;
+}
+.Zonalibre {
+  visibility: hidden;
+}
+.Zonalibre2 {
+  visibility: hidden;
+}
+.clon10A{
+  visibility: hidden;
+}
+.clon0 {
+  visibility: hidden;
+}
+/* line 132, ../scss/sunapp.scss */
+.primerafila {
+  width: 75px;
+  height: 45px;
+  border-radius: 30px;
+}
+
+/* line 139, ../scss/sunapp.scss */
+.h1 {
+  margin-top: -50px;
+}
+.h3 {
+
+  font-size: 28px;
+
+}
+
+/* line 143, ../scss/sunapp.scss */
+form {
+  /*Codigo centrado formulario */
+  margin-top: 25px;
+  border: 0;
+  text-align: center;
+  padding: 0;
+}
+
+/* line 151, ../scss/sunapp.scss */
+.form input {
+  width: 100%;
+  height: 15px;
+}
+
+/* To check if do something */
+/* line 158, ../scss/sunapp.scss */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 164, ../scss/sunapp.scss */
+form li + li {
+  margin-top: 1px;
+}
+
+/* line 168, ../scss/sunapp.scss */
+label {
+  /*Tamaño y alineacion uniforme*/
+  display: inline-block;
+  width: 7px;
+  text-align: center;
+}
+
+/* line 176, ../scss/sunapp.scss */
+input, textarea {
+  font: 13px sans-serif;
+  widht: 7px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+}
+
+/* line 184, ../scss/sunapp.scss */
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-family: Tahoma;
+  font-size: 35px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #e8bb4a;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 4px #999;
+  margin-right: 500px;
+}
+
+/* line 201, ../scss/sunapp.scss */
+.button:hover {
+  background-color: #b89232;
+}
+
+/* line 205, ../scss/sunapp.scss */
+.button:active {
+  background-color: #cfb063;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/*POSICION DEL NUMERO 8  */
+.sunbed:nth-of-type(10):before {
+ content: 'Oficina________8';
+  position: absolute;
+  right: 100%;
+  font-size: 45px;
+  color: black;
+  -webkit-text-stroke: 0px white;
+  margin-right: -40px;
+  visibility: visible;
+   
+}
+
+/*POSICION DEL NUMERO 7 DELANTE DE 79 */
+.sunbed:nth-of-type(15):before {
+  content: '7';
+  position: absolute;
+  right: -205%;
+  font-size: 45px;
+  color: red;
+  margin-right: 20px;
+  visibility:visible;
+    
+}
+
+/*POSICION DEL NUMERO 7 DELANTE DE MAGENTA */
+.sunbed:nth-of-type(17):before {
+  content: '7';
+  position: absolute;
+  right: 72%;
+  font-size: 45px;
+  color: red;
+  margin-right: 20px;
+    
+}
+
+/*POSICION DEL NUMERO 6 DELANTE DE 69C */
+.sunbed:nth-of-type(31):before {
+  content: '6';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+    
+}
+
+/*POSICION DEL NUMERO 6 DELANTE DE 69A--- */
+.sunbed:nth-of-type(33):before {
+  content: '6';
+  position: absolute;
+  right: 102%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+    
+}
+
+/*POSICION DEL NUMERO 5 DELANTE DE 59C */
+.sunbed:nth-of-type(45):before {
+  content: '5';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+    
+}
+
+/*POSICION DEL NUMERO 6 DELANTE DE 59A--- */
+.sunbed:nth-of-type(47):before {
+  content: '5';
+  position: absolute;
+  right: 102%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+    
+}
+
+/*POSICION DEL NUMERO 4 DELANTE DE 49C */
+.sunbed:nth-of-type(59):before {
+  content: '4';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 4 DELANTE DE 49A--- */
+.sunbed:nth-of-type(61):before {
+  content: '4';
+  position: absolute;
+  right: 102%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 3 DELANTE DE 39C */
+.sunbed:nth-of-type(73):before {
+  content: '3';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 3 DELANTE DE 39A--- */
+.sunbed:nth-of-type(75):before {
+  content: '3';
+  position: absolute;
+  right: 102%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 4 DELANTE DE 29C */
+.sunbed:nth-of-type(87):before {
+  content: '2';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+
+}
+
+/*POSICION DEL NUMERO 4 DELANTE DE 29A--- */
+.sunbed:nth-of-type(89):before {
+  content: '2';
+  position: absolute;
+  right: 101%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+
+}
+
+/*POSICION DEL NUMERO 1 DELANTE DE 19C */
+.sunbed:nth-of-type(101):before {
+  content: '1';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 1 DELANTE DE 19A--- */
+.sunbed:nth-of-type(103):before {
+  content: '1';
+  position: absolute;
+  right: 100%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 0 DELANTE DE 9D */
+.sunbed:nth-of-type(115):before {
+  content: '0';
+  position: absolute;
+  right: 105%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+/*POSICION DEL NUMERO 0 DELANTE DE 9A */
+.sunbed:nth-of-type(117):before {
+  content: '0';
+  position: absolute;
+  right: 101%;
+  font-size: 45px;
+  color: red;
+  margin-right: 200px;
+  
+  
+}
+
+.sunbed:nth-of-type(26):after {
+  content: '7';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+  
+}
+
+.sunbed:nth-of-type(40):after {
+  content: '6';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+  
+  
+  
+}
+
+.sunbed:nth-of-type(54):after {
+  content: '5';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+  
+  
+  
+}
+
+.sunbed:nth-of-type(68):after {
+  content: '4';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+  
+}
+.sunbed:nth-of-type(82):after {
+  content: '3';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+}
+.sunbed:nth-of-type(96):after {
+  content: '2';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+}
+.sunbed:nth-of-type(110):after {
+  content: '1';
+  position:absolute;
+  top: -05px;
+  left:420%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+}
+
+.sunbed:nth-of-type(125):after {
+  content: '0';
+  position:absolute;
+  top: -05px;
+  left:300%;
+  font-size: 45px;
+  color: red;
+  margin-right: 10px;
+   
+}
+
+
+/* Estilo para la calculadora */
+
+/* Estilo mejorado sin alterar la posición original */
+.calculator-footer {
+  width: 600%;
+  background-color: #ffffff;
+  padding-bottom: 2000px;
+  padding-left:100px;
+  padding-right:100px;
+  margin-top: 1200px;
+  margin-left: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 80px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.calculator-footer h2 {
+  font-size: 34px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calculator-footer label {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.calculator-footer input,
+.calculator-footer select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.calculator-footer button {
+  padding: 14px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.calculator-footer button:hover {
+  background-color: #388e3c;
+}
+
+.cambio {
+  margin-top: 25px;
+  font-size: 70px;
+  color: #2e7d32;
+  text-align: center;
+}
+
+.registro {
+  margin-top: 25px;
+}
+
+.registro h4 {
+  font-size: 22px;
+  color: #555;
+}
+
+.registro p {
+  font-size: 34px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.button-container button {
+  padding: 12px 20px;
+  background-color: #f4a261;
+  color: white;
+  font-size: 26px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #e76f51;
+}
+
+/* Historial scroll */
+#historialContainer {
+  margin-top: 20px;
+  max-height: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+#historial {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#historial li {
+  font-size: 24px;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: #fff;
+  border-left: 4px solid #4caf50;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  word-wrap: break-word;
+}
+
+#historialContainer h4 {
+  font-size: 26px;
+  }
