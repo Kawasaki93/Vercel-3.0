@@ -1,2 +1,1 @@
 {  "cleanUrls": true,  "routes": [    {      "src": "/style.css",      "dest": "/style.css"    },    {      "src": "/script.js",      "dest": "/script.js"    },    {      "src": "/(.*)",      "dest": "/index.html"    }  "rewrites": [    { "source": "/(.*)", "destination": "/index.html" }  ]}
-0 commit commentsComments0
