@@ -26,7 +26,7 @@
     document.getElementById("current_date").innerHTML = `${day}/${month}/${year}`;
   </script>
 <br><br>
-  <button class="button" onclick="SunbedController.reset_local_storage_except_customers(); SunbedController.restore_total_sold();">Reset Colors</button>
+  <button class="button" onclick="SunbedController.reset_local_storage_except_customers(); ">Reset Colors</button>
   <br><br><br>
   <button class="button" onclick="toggleDesconectadosFila0(1)">Fila0</button>
   <br><br>
@@ -48,6 +48,9 @@
   <br><br>
   <button class="button" onclick="toggleclon0(1)">Clon0</button>
   <br><br>
+  <button class="button" onclick="toggleCircles()">Sombrillas</button>
+
+<br><br>
   <button class="button" onclick="clearClick(1)">Reset Local Storage</button>
 </div>
 
@@ -59,7 +62,16 @@
         <input type="text" class="customer_name">
       </form>
     </div>
+    <!-- Aquí añades el círculo -->
+   <div class="circle toggle" id="circle1" data-actual-step="0"></div>
+<div class="circle toggle" id="circle2" data-actual-step="0"></div>
+<div class="circle toggle" id="circle3" data-actual-step="0"></div>
+<!-- Puedes agregar más círculos según lo necesites -->
+<!-- Agrega más círculos según sea necesario -->
   </div>
+  <!-- Repite la estructura para más hamacas -->
+
+
 
   <!-- Calculadora de cobro -->
 <!-- Calculadora de cobro -->
