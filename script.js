@@ -1017,8 +1017,13 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             activeSunbed = sunbed;
             contextMenu.style.display = 'block';
-            contextMenu.style.left = e.pageX + 'px';
-            contextMenu.style.top = e.pageY + 'px';
+            
+            // Obtener la posición de la sunbed
+            const sunbedRect = sunbed.getBoundingClientRect();
+            
+            // Posicionar el menú justo encima de la sunbed
+            contextMenu.style.left = (sunbedRect.left + window.scrollX) + 'px';
+            contextMenu.style.top = (sunbedRect.top + window.scrollY - contextMenu.offsetHeight - 10) + 'px';
         }
     });
 
