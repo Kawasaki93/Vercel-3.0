@@ -718,3 +718,31 @@ input, textarea {
 #historialContainer h4 {
   font-size: 26px;
   }
+
+/* Estilos para el menú contextual de colores */
+.color-context-menu {
+  position: fixed;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: none;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid #000;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.color-option.step1 { background-color: LightSeaGreen; }
+.color-option.step2 { background-color: red; }
+.color-option.step3 { background-color: orange; }
+.color-option.step4 { background-color: green; }
+.color-option.step5 { background-color: LightSeaGreen; }
+.color-option.step6 { background-color: red; }

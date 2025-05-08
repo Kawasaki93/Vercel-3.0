@@ -1004,3 +1004,57 @@ setupColorCycle('.sunbed', 6, 'sunbed_color_');
 
 
 //------zona pruebas
+
+// Manejo del menú contextual de colores
+document.addEventListener('DOMContentLoaded', function() {
+    const contextMenu = document.getElementById('colorContextMenu');
+    let activeSunbed = null;
+
+    // Mostrar menú contextual al hacer clic derecho o mantener pulsado
+    document.addEventListener('contextmenu', function(e) {
+        const sunbed = e.target.closest('.sunbed');
+        if (sunbed) {
+            e.preventDefault();
+            activeSunbed = sunbed;
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.pageX + 'px';
+            contextMenu.style.top = e.pageY + 'px';
+        }
+    });
+
+    // Cerrar menú al hacer clic en cualquier lugar
+    document.addEventListener('click', function(e) {
+        if (!contextMenu.contains(e.target)) {
+            contextMenu.style.display = 'none';
+        }
+    });
+
+    // Manejar la selección de color
+    contextMenu.addEventListener('click', function(e) {
+        const colorOption = e.target.closest('.color-option');
+        if (colorOption && activeSunbed) {
+            const step = colorOption.dataset.step;
+            
+            // Eliminar clases anteriores
+            for (let i = 1; i <= 6; i++) {
+                activeSunbed.classList.remove('step' + i);
+            }
+            
+            // Añadir nueva clase
+            activeSunbed.classList.add('step' + step);
+            activeSunbed.dataset.actualStep = step;
+            
+            // Guardar en localStorage
+            const sunbedId = activeSunbed.id;
+            localStorage.setItem('sunbed_color' + sunbedId, step);
+            
+            // Ocultar menú
+            contextMenu.style.display = 'none';
+        }
+    });
+
+    // Cerrar menú al hacer scroll
+    window.addEventListener('scroll', function() {
+        contextMenu.style.display = 'none';
+    });
+});
