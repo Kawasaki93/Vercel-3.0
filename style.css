@@ -247,7 +247,7 @@ ul {
 
 /* line 164, ../scss/sunapp.scss */
 form li + li {
-  margin-top: 1px;
+  margin-top: -10px;
 }
 
 /* line 168, ../scss/sunapp.scss */
