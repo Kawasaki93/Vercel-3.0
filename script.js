@@ -14,7 +14,7 @@ let variable1;
 for (var x = 1; x < 126; x++) {
   let cloned_element = $(".sunbed").first().clone();
   cloned_element.attr("id", "clon_" + x);
- 
+
   if (x === 10) {
     cloned_element.find(".sunbed_name").html(82); // Asigna 85 al clon número 10
 } else if (x === 9) {
@@ -32,7 +32,7 @@ for (var x = 1; x < 126; x++) {
 } else if (x === 20) {
     cloned_element.find(".sunbed_name").html(76); // Asigna 78 al clon número 20
 } else if (x === 16 || x === 17 || x === 18) {
-    cloned_element.find(".sunbed_name").html("Z"); // Cambia el contenido de los clones 17, 18 y 19 a "X"
+    cloned_element.find(".sunbed_name").html("M"); // Cambia el contenido de los clones 17, 18 y 19 a "X"
 } else if (x === 21) {
     cloned_element.find(".sunbed_name").html(75); // Asigna 77 al clon número 21
 } else if (x === 22) {
@@ -235,11 +235,11 @@ for (var x = 1; x < 126; x++) {
 } else if (x === 125) {
     cloned_element.find(".sunbed_name").html(0);
 
- 
-  
+
+
 }
 
-  
+
   $(".beach_wrapper").append(cloned_element);
 }
 
@@ -438,7 +438,7 @@ $(document).ready(function() {
         $(".desconectadosFila0").css("visibility", "hidden");
     }
 });
-  
+
 //VISIBILIDAD DE LA ZONA LIBRE 1--------------------------------------  
 function toggleZonalibre() {
     var $Zonalibre = $(".Zonalibre");
@@ -486,7 +486,7 @@ $(document).ready(function() {
         $(".Zonalibre2").css("visibility", "hidden");
     }
 });
- 
+
 
 //VISIBILIDAD DEL CLON 10A--------------------------------------  
 function toggleclon10A() {
@@ -511,7 +511,7 @@ $(document).ready(function() {
         $(".clon10A").css("visibility", "hidden");
     }
 });
- 
+
 //VISIBILIDAD DEL CLON 0--------------------------------------  
 function toggleclon0() {
     var $clon0 = $(".clon0");
@@ -535,7 +535,46 @@ $(document).ready(function() {
         $(".clon0").css("visibility", "hidden");
     }
 });
- 
+
+//VISIBILIDAD DE LOS CIRCULOS---------------
+
+  // Variable para controlar la visibilidad de los círculos
+  let circlesVisible = true;
+
+  // Comprobar el estado guardado en localStorage al cargar la página
+  window.onload = function() {
+    // Verificamos si hay un estado guardado en localStorage
+    const savedState = localStorage.getItem('circlesVisible');
+    if (savedState !== null) {
+      circlesVisible = savedState === 'true'; // Convertirlo a un valor booleano
+    }
+
+    // Actualizar la visibilidad de los círculos según el estado guardado
+    const circles = document.querySelectorAll('.circle');
+    circles.forEach(circle => {
+      circle.style.display = circlesVisible ? 'block' : 'none';
+    });
+
+    // Restaurar el color de los círculos desde localStorage
+    document.querySelectorAll('.circle').forEach(circle => {
+      const savedColorStep = localStorage.getItem('circle_color_' + circle.id);
+      if (savedColorStep) {
+        circle.classList.add('step' + savedColorStep); // Aplicar la clase de color guardada
+      }
+    });
+  };
+
+  // Función para alternar la visibilidad de los círculos y guardar el estado
+  function toggleCircles() {
+    const circles = document.querySelectorAll('.circle');
+    circles.forEach(circle => {
+      circle.style.display = circlesVisible ? 'none' : 'block';
+    });
+
+    // Guardar el nuevo estado en localStorage
+    circlesVisible = !circlesVisible;
+    localStorage.setItem('circlesVisible', circlesVisible); // Guardamos el estado
+  }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 var SunbedController = function() {
@@ -562,21 +601,8 @@ var SunbedController = function() {
                localStorage.setItem('comments', actual_value);
             });
 
-            //bucle de colores
-            $('.toggle').dblclick(function () {
-                let arr_steps = [1, 2, 3, 4, 5, 6],
-                    step = parseInt($(this).data('actual-step')) || 0,
-                    nuevo_step = (step === arr_steps.length) ? 1 : step + 1;
-
-                $(this).removeClass('step' + step);
-                $(this).addClass('step' + nuevo_step);
-                $(this).data('actual-step', nuevo_step);
-
-                let actual_id = $(this).attr('id'),
-                    target_key = 'sunbed_color' + actual_id;
-
-                localStorage.setItem(target_key, nuevo_step);
-            });
+          
+            
         },
 
         restore_customers_name: function() {
@@ -602,7 +628,7 @@ var SunbedController = function() {
                     $(this).addClass('step' + target_step);
                     $(this).data('actual-step', target_step);
                 }
-             
+
             });
         },
 
@@ -629,14 +655,18 @@ var SunbedController = function() {
         },
 
         reset_local_storage_except_customers: function () {           
-            Object.keys(localStorage).forEach(function (local_key) {
-                if (local_key.indexOf('customer_name') === -1) {
-                    localStorage.removeItem(local_key);
-                }
-            });
+    Object.keys(localStorage).forEach(function (local_key) {
+        // Solo eliminar si NO es customer_name y NO es visibilidad de fila o zona libre
+        if (
+            !local_key.includes('customer_name') &&
+            !local_key.includes('Visibility')
+        ) {
+            localStorage.removeItem(local_key);
+        }
+    });
 
-            window.location.reload();
-        },
+    window.location.reload();
+},
 
 
 
@@ -646,8 +676,8 @@ var SunbedController = function() {
                 $("#comments").val(old_comments);
             }
         },
-      
-     
+
+
         restore_total_sold: function(){
             localStorage.getItem(total_sold);
             localStorage.removeItem(total_sold);
@@ -742,20 +772,24 @@ function procesarDevolucion() {
   const recibidoManual = parseFloat(document.getElementById('recibidoManual').value);
   const metodo = document.getElementById('pago').value;
 
+  // Usamos el total como el valor de lo que se debe devolver
   const total = totalManual || totalSelect;
-  const recibido = recibidoManual || recibidoSelect;
 
-  if (isNaN(total) || isNaN(recibido)) {
-    alert("Por favor, introduce montos válidos.");
+  if (isNaN(total)) {
+    alert("Por favor, introduce un monto válido.");
     return;
   }
 
-  const devolucion = total - recibido;
+  // La devolución será simplemente el total (es decir, se debe devolver todo el monto)
+  const devolucion = total;
+
+  // Mostramos el monto de la devolución
   document.getElementById('resultado').textContent = `Devolución: €${devolucion.toFixed(2)}`;
 
   const historial = document.getElementById('historial');
   const li = document.createElement('li');
 
+  // Fecha y hora del registro
   const fechaObj = new Date();
   const dia = String(fechaObj.getDate()).padStart(2, '0');
   const mes = String(fechaObj.getMonth() + 1).padStart(2, '0');
@@ -764,30 +798,34 @@ function procesarDevolucion() {
   const minutos = String(fechaObj.getMinutes()).padStart(2, '0');
   const fecha = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
 
-  li.textContent = `Devolución Hamaca ${hamaca} - Total: €${total.toFixed(2)} - Recibido: €${recibido.toFixed(2)} - Devolución: €${devolucion.toFixed(2)} - Método: ${metodo} - ${fecha}`;
+  // Creamos el elemento de historial
+  li.textContent = `Devolución Hamaca ${hamaca} - Total: €${total.toFixed(2)} - Devolución: €${devolucion.toFixed(2)} - Método: ${metodo} - ${fecha}`;
   historial.insertBefore(li, historial.firstChild);
 
+  // Actualizamos los totales de efectivo o tarjeta según el método de pago
   if (metodo === 'efectivo') {
-    totalEfectivo -= total;
+    totalEfectivo -= total;  // Restamos el total para reflejar la devolución
   } else {
-    totalTarjeta -= total;
+    totalTarjeta -= total;  // Restamos el total para reflejar la devolución
   }
 
+  // Actualizamos el total en pantalla
   document.getElementById('totalEfectivo').textContent = totalEfectivo.toFixed(2);
   document.getElementById('totalTarjeta').textContent = totalTarjeta.toFixed(2);
   document.getElementById('totalGeneral').textContent = (totalEfectivo + totalTarjeta).toFixed(2);
 
+  // Guardamos el historial en localStorage
   let datosHistorial = JSON.parse(localStorage.getItem("historial")) || [];
   datosHistorial.push({
     fecha,
     hamaca: hamaca || "-",
     total: total.toFixed(2),
-    recibido: recibido.toFixed(2),
     devolucion: devolucion.toFixed(2),
     metodo
   });
   localStorage.setItem("historial", JSON.stringify(datosHistorial));
 
+  // Guardamos la operación de la devolución en el historial de operaciones
   let operaciones = JSON.parse(localStorage.getItem("operaciones")) || [];
   operaciones.push({
     fecha,
@@ -797,6 +835,7 @@ function procesarDevolucion() {
   });
   localStorage.setItem("operaciones", JSON.stringify(operaciones));
 }
+
 function toggleHistorial() {
   const historialContainer = document.getElementById('historialContainer');
   historialContainer.style.display = historialContainer.style.display === 'none' ? 'block' : 'none';
@@ -809,7 +848,11 @@ function descargarHistorial() {
   const resumenMensual = {};
 
   datosHistorial.forEach(entry => {
-    const fecha = new Date(entry.fecha);
+    // Manejo correcto para fechas en formato DD/MM/YYYY
+    let [dia, mes, anioHora] = entry.fecha.split('/');
+    let [anio] = anioHora.split(' ');
+    let fecha = new Date(`${anio}-${mes}-${dia}`);
+
     const diaClave = `${String(fecha.getDate()).padStart(2, '0')}/${String(fecha.getMonth() + 1).padStart(2, '0')}/${fecha.getFullYear()}`;
     const mesClave = `${String(fecha.getMonth() + 1).padStart(2, '0')}/${fecha.getFullYear()}`;
     const total = parseFloat(entry.total || 0);
@@ -843,7 +886,7 @@ function descargarHistorial() {
     csv += `${mes},${m.efectivo.toFixed(2)},${m.tarjeta.toFixed(2)},${(m.efectivo + m.tarjeta).toFixed(2)}\n`;
   }
 
-  const blob = new Blob([csv], { type: "text/csv" });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.setAttribute("href", url);
@@ -852,6 +895,7 @@ function descargarHistorial() {
   link.click();
   document.body.removeChild(link);
 }
+
 
 function reiniciarCalculadora() {
   document.getElementById('hamaca').value = '';
@@ -881,14 +925,15 @@ function descargarLog() {
   let csv = "Fecha,Hora,Hamaca,Pagado,Devuelto\n";
 
   operaciones.forEach(entry => {
-    const fechaObj = new Date(entry.fecha);
-    const fecha = fechaObj.toLocaleDateString('es-ES');
-    const hora = fechaObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    // Separar la fecha original "DD/MM/YYYY HH:MM"
+    const partes = entry.fecha.split(' ');
+    const fechaTexto = partes[0]; // "DD/MM/YYYY"
+    const horaTexto = partes[1] || ''; // "HH:MM"
 
-    csv += `${fecha},${hora},${entry.hamaca},${entry.pagado},${entry.devuelto}\n`;
+    csv += `${fechaTexto},${horaTexto},${entry.hamaca},${entry.pagado},${entry.devuelto}\n`;
   });
 
-  const blob = new Blob([csv], { type: "text/csv" });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.setAttribute("href", url);
@@ -896,7 +941,66 @@ function descargarLog() {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-      }
+}
+
+
+//FUNCIONAMIENTO DE SERVICE WORKER NO TOCAR
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then((reg) => {
+      console.log("Service Worker registrado", reg);
+    }).catch((err) => {
+      console.error("Error al registrar el Service Worker", err);
+    });
+  });
+}
 
 
 
+
+
+// Bucle de colores para los círculos
+
+
+function setupColorCycle(selector, stepsCount, storagePrefix) {
+    $(selector).each(function (index) {
+        const el = $(this);
+        const storageKey = storagePrefix + index;
+
+        el.on('dblclick', function (event) {
+            event.stopPropagation();
+
+            const currentStep = parseInt(el.data('actual-step')) || 0;
+            const newStep = currentStep >= stepsCount ? 1 : currentStep + 1;
+
+            // Eliminar clases anteriores
+            for (let i = 1; i <= stepsCount; i++) {
+                el.removeClass('step' + i);
+            }
+
+            // Añadir nueva clase
+            el.addClass('step' + newStep);
+            el.data('actual-step', newStep);
+
+            // Guardar en localStorage
+            localStorage.setItem(storageKey, newStep);
+        });
+
+        // Restaurar estado desde localStorage
+        const savedStep = localStorage.getItem(storageKey);
+        if (savedStep) {
+            for (let i = 1; i <= stepsCount; i++) {
+                el.removeClass('step' + i);
+            }
+            el.addClass('step' + savedStep);
+            el.data('actual-step', savedStep);
+        }
+    });
+}
+
+// Aplicamos color cycle separado
+setupColorCycle('.circle', 3, 'circle_color_');
+setupColorCycle('.sunbed', 6, 'sunbed_color_');
+
+
+//------zona pruebas
