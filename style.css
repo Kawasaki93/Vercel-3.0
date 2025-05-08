@@ -6,28 +6,29 @@
 
 /* line 6, ../scss/sunapp.scss */
 .beach_wrapper {
-  width: 83%;
+  width: 23%;
   max-width: 100%;
   display: grid;
   grid-template-columns:100px 100px 100px 100px 100px 150px 100px 100px 100px 100px 100px 100px 100px 100px;
   grid-template-rows: 130px 130px 130px 130px 130px 130px 130px 130px 450px 130px 130px 130px 130px 130px 130px 130px;
   gap: 0px 0px;
-  float: right;
+  float: left;
+  margin-left:-200px;
 }
 
 /* line 16, ../scss/sunapp.scss */
 body {
-  align-items: center;
-  width: 50%;
+  align-items:left;
+  width: 15%;
   height: 50%;
   transform-origin: top left;
   font-family: Tahoma, sans-serif;
   background: #CEEFF1;
-  margin-left: -210px;
-  margin-right: auto;
+  margin-left: auto;
+  margin-right: 7000px;
   margin-top:30px;
   touch-action: manipulation;
-  font-size: 40px;
+  font-size: 50px;
   text-align: center;
 }
 
@@ -38,9 +39,9 @@ body {
 
 /* line 34, ../scss/sunapp.scss */
 .left_panel {
-  width: 0%;
+  width: 1%;
   float: right;
-  margin-right:-1500px;
+  margin-right: -1500px;
 }
 
 /* line 41, ../scss/sunapp.scss */
@@ -61,18 +62,37 @@ body {
   height: 40px;
   border: 2px solid;
   color: orange;
-  -webkit-text-stroke: 0.4px white;
+  -webkit-text-stroke: 0.3px white;
   border-color: black;
   background: green;
-  text-align: center;
+  text-align: left;
   display: inline-block;
   font-family: sans-serif;
-  font-size: 29px;
+  font-size: 38px;
   margin-left: 120px;
   margin-top: 15px;
   position: relative;
-  font-weight: 800; /* Equivale a bold */
+  font-weight: 750; /* Equivale a bold */
   user-select:none;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+
+  clip-path: polygon(
+    30% 0%, 70% 0%,
+    100% 30%, 100% 70%,
+    70% 100%, 30% 100%,
+    0% 70%, 0% 30%
+  );
+
+  position: absolute;
+  top: -80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 /* CLON 1 ORIGINAL  */
@@ -83,46 +103,40 @@ body {
 
 /* line 71, ../scss/sunapp.scss */
 .sunbed .sunbed_name {
-  color: black;
+  color: white;
 }
 
-/* line 75, ../scss/sunapp.scss */
-.sunbed.step1 {
-  background: LightSeaGreen;
+
+
+
+/* Colores del círculo (3 pasos) */
+
+.circle.step1 { background-color: LightSeaGreen; }
+
+.circle.step2 { background-color: red; }
+
+.circle.step3 { background-color: green; }
+
+/* Colores de las sunbeds (6 pasos) */
+
+.sunbed.step1 { background-color: LightSeaGreen; }
+
+.sunbed.step2 { background-color: red; }
+
+.sunbed.step3 { background-color: orange;}
+
+.sunbed.step4 { background-color: green; }
+
+.sunbed.step5 { background-color: LightSeaGreen; }
+
+.sunbed.step6 { background-color: red; }
+
+
+
+
   /*ocupado*/
-}
-
-/* line 80, ../scss/sunapp.scss */
-.sunbed.step2 {
-  background: red;
-  /*pagado*/
-}
-
-/* line 85, ../scss/sunapp.scss */
-.sunbed.step3 {
-  background: linear-gradient(to left, LightSeaGreen 50%, DarkCyan 50%);
-  /*ocupado con 3 hamacas cada lado*/
-}
-
-/* line 90, ../scss/sunapp.scss */
-.sunbed.step4 {
-  background: linear-gradient(to left, LightSeaGreen 50%, green 50%);
-  /*ocupado 1 persona sola*/
-}
-
-/* line 96, ../scss/sunapp.scss */
-.sunbed.step5 {
-  background: orange;
-  /*hamaca off*/
-}
-
-/* line 102, ../scss/sunapp.scss */
-.sunbed.step6 {
-  background: green;
-}
-
 .form {
-  margin-top:8px;
+  margin-top:-10px;
   }
 /* line 106, ../scss/sunapp.scss */
 .form input {
