@@ -136,7 +136,7 @@ body {
 
   /*ocupado*/
 .form {
-  margin-top: -12px;
+  margin-top: -15px !important;
   }
 /* line 106, ../scss/sunapp.scss */
 .form input {
@@ -225,7 +225,7 @@ body {
 /* line 143, ../scss/sunapp.scss */
 form {
   /*Codigo centrado formulario */ 
-  margin-top:;
+  margin-top:-15px;
   border: 0;
   text-align: center;
   padding: 0;
