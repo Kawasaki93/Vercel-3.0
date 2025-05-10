@@ -1157,3 +1157,14 @@ function cargarEstadosHamacas() {
     }
   });
 }
+
+function scrollHistorial(direction) {
+  const container = document.getElementById('historialContainer');
+  const scrollAmount = 100; // Cantidad de píxeles a desplazar
+  
+  if (direction === 'up') {
+    container.scrollTop -= scrollAmount;
+  } else {
+    container.scrollTop += scrollAmount;
+  }
+}

@@ -688,46 +688,92 @@ input, textarea {
 
 /* Historial scroll */
 #historialContainer {
-  margin-top: 20px;
   max-height: 300px;
   overflow-y: auto;
-  overflow-x: hidden;
-  padding: 12px;
-  border-top: 1px solid #ddd;
-  background-color: #f9f9f9;
-  border-radius: 8px;
   position: relative;
-  display: none; /* Inicialmente oculto */
+  display: none;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Para Firefox */
+}
+
+/* Estilos para la barra de scroll en Chrome/Safari */
+#historialContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+#historialContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#historialContainer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+#historialContainer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Estilos para las flechas de navegación */
+.historial-nav {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.historial-nav button {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.historial-nav button:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 #historial {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
-}
-
-#historial li {
-  font-size: 24px;
-  margin-bottom: 8px;
-  padding: 8px;
-  background: #fff;
-  border-left: 4px solid #4caf50;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  word-wrap: break-word;
   width: 100%;
   box-sizing: border-box;
 }
 
+#historial li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+/* Estilos para el encabezado del historial */
 #historialContainer h4 {
-  font-size: 26px;
   position: sticky;
   top: 0;
-  background-color: #f9f9f9;
-  padding: 10px 0;
+  background: white;
   margin: 0;
+  padding: 10px;
   z-index: 1;
+  border-bottom: 2px solid #eee;
 }
 
 /* Estilos para el menú contextual de colores */
