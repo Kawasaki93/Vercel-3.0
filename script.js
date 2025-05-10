@@ -707,16 +707,50 @@ function calcularCambio() {
   const recibidoSelect = parseFloat(document.getElementById('recibidoSelect').value);
   const recibidoManual = parseFloat(document.getElementById('recibidoManual').value);
   const metodo = document.getElementById('pago').value;
+  const sombrillaExtra = document.getElementById('sombrillaExtra').value;
 
-  const total = totalManual || totalSelect;
-  const recibido = recibidoManual || recibidoSelect;
-
-  if (isNaN(total) || isNaN(recibido)) {
-    alert("Por favor, introduce montos válidos.");
-    return;
+  let total = totalManual || totalSelect;
+  
+  // Añadir 4€ si hay sombrilla extra
+  if (sombrillaExtra === 'si') {
+    total += 4;
+  }
+  
+  // Si es pago con tarjeta, no necesitamos el monto recibido
+  let recibido = 0;
+  let cambio = 0;
+  
+  if (metodo === 'efectivo') {
+    recibido = recibidoManual || recibidoSelect;
+    if (isNaN(total) || isNaN(recibido)) {
+      alert("Por favor, introduce montos válidos.");
+      return;
+    }
+    cambio = recibido - total;
+  } else {
+    // Para tarjeta, el cambio siempre es 0
+    recibido = total;
+    cambio = 0;
   }
 
-  const cambio = recibido - total;
+  // Cambiar el color de la hamaca específica a rojo
+  if (hamaca) {
+    // Buscar la hamaca exacta por su número
+    const hamacaElement = $('.sunbed_name').filter(function() {
+      return $(this).text().trim() === hamaca;
+    }).closest('.sunbed');
+
+    if (hamacaElement.length > 0) {
+      // Remover todas las clases de color anteriores
+      hamacaElement.removeClass('step1 step2 step3 step4 step5 step6');
+      // Agregar la clase step2 (rojo)
+      hamacaElement.addClass('step2');
+      // Guardar el estado en localStorage
+      const hamacaId = hamacaElement.attr('id');
+      localStorage.setItem('sunbed_color_' + hamacaId, '2');
+    }
+  }
+
   document.getElementById('resultado').textContent = `Cambio: €${cambio.toFixed(2)}`;
 
   const historial = document.getElementById('historial');
@@ -730,7 +764,9 @@ function calcularCambio() {
   const minutos = String(fechaObj.getMinutes()).padStart(2, '0');
   const fecha = `${dia}/${mes}/${anio} ${horas}:${minutos}`;
 
-  li.textContent = `Hamaca ${hamaca} - Total: €${total.toFixed(2)} - Recibido: €${recibido.toFixed(2)} - Cambio: €${cambio.toFixed(2)} - Método: ${metodo} - ${fecha}`;
+  // Añadir información de sombrilla extra al historial si está seleccionada
+  const sombrillaInfo = sombrillaExtra === 'si' ? ' (Sombrilla Extra)' : '';
+  li.textContent = `Hamaca ${hamaca} - Total: €${total.toFixed(2)}${sombrillaInfo} - Recibido: €${recibido.toFixed(2)} - Cambio: €${cambio.toFixed(2)} - Método: ${metodo} - ${fecha}`;
   historial.insertBefore(li, historial.firstChild);
 
   if (metodo === 'efectivo') {
@@ -750,7 +786,8 @@ function calcularCambio() {
     total: total.toFixed(2),
     recibido: recibido.toFixed(2),
     cambio: cambio.toFixed(2),
-    metodo
+    metodo,
+    sombrillaExtra: sombrillaExtra === 'si'
   });
   localStorage.setItem("historial", JSON.stringify(datosHistorial));
 
@@ -896,6 +933,56 @@ function descargarHistorial() {
   document.body.removeChild(link);
 }
 
+function cargarHistorial() {
+  const historial = document.getElementById('historial');
+  const datosHistorial = JSON.parse(localStorage.getItem("historial")) || [];
+  
+  // Limpiar el historial actual
+  historial.innerHTML = '';
+  
+  // Recargar el historial desde localStorage
+  datosHistorial.forEach(entry => {
+    const li = document.createElement('li');
+    if (entry.devolucion) {
+      li.textContent = `Devolución Hamaca ${entry.hamaca} - Total: €${entry.total} - Devolución: €${entry.devolucion} - Método: ${entry.metodo} - ${entry.fecha}`;
+    } else {
+      li.textContent = `Hamaca ${entry.hamaca} - Total: €${entry.total} - Recibido: €${entry.recibido} - Cambio: €${entry.cambio} - Método: ${entry.metodo} - ${entry.fecha}`;
+    }
+    historial.insertBefore(li, historial.firstChild);
+  });
+
+  // Recargar los totales
+  totalEfectivo = 0;
+  totalTarjeta = 0;
+  
+  datosHistorial.forEach(entry => {
+    if (!entry.devolucion) {
+      const total = parseFloat(entry.total);
+      if (entry.metodo === 'efectivo') {
+        totalEfectivo += total;
+      } else {
+        totalTarjeta += total;
+      }
+    } else {
+      const total = parseFloat(entry.total);
+      if (entry.metodo === 'efectivo') {
+        totalEfectivo -= total;
+      } else {
+        totalTarjeta -= total;
+      }
+    }
+  });
+
+  document.getElementById('totalEfectivo').textContent = totalEfectivo.toFixed(2);
+  document.getElementById('totalTarjeta').textContent = totalTarjeta.toFixed(2);
+  document.getElementById('totalGeneral').textContent = (totalEfectivo + totalTarjeta).toFixed(2);
+}
+
+// Cargar el historial cuando se inicia la página
+$(document).ready(function() {
+  cargarEstadosHamacas();
+  cargarHistorial();
+});
 
 function reiniciarCalculadora() {
   document.getElementById('hamaca').value = '';
@@ -906,17 +993,8 @@ function reiniciarCalculadora() {
   document.getElementById('pago').selectedIndex = 0;
   document.getElementById('resultado').textContent = '';
 
-  totalEfectivo = 0;
-  totalTarjeta = 0;
-
-  document.getElementById('totalEfectivo').textContent = '0.00';
-  document.getElementById('totalTarjeta').textContent = '0.00';
-  document.getElementById('totalGeneral').textContent = '0.00';
-
-  const historial = document.getElementById('historial');
-  historial.innerHTML = '';
-
-  localStorage.removeItem('historial'); // solo historial, no operaciones
+  // No reiniciamos los totales ni el historial aquí
+  // ya que queremos mantener los datos en localStorage
 }
 
 function descargarLog() {
@@ -1063,3 +1141,19 @@ document.addEventListener('DOMContentLoaded', function() {
         contextMenu.style.display = 'none';
     });
 });
+
+// Función para cargar los estados de las hamacas desde localStorage
+function cargarEstadosHamacas() {
+  // Obtener todas las hamacas
+  $('.sunbed').each(function() {
+    const hamacaId = $(this).attr('id');
+    const colorGuardado = localStorage.getItem('sunbed_color_' + hamacaId);
+    
+    if (colorGuardado) {
+      // Remover todas las clases de color anteriores
+      $(this).removeClass('step1 step2 step3 step4 step5 step6');
+      // Agregar la clase guardada
+      $(this).addClass('step' + colorGuardado);
+    }
+  });
+}
