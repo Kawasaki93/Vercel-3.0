@@ -286,8 +286,10 @@ $("#clon_83,#clon_84,#clon_85,#clon_89,#clon_90,#clon_91,#clon_92,#clon_93,#clon
 
 //clear localstorage
 function clearClick(number) {
-    localStorage.clear();
-    window.location.reload();
+    if (confirm("¿Estás seguro de que deseas borrar TODOS los datos almacenados? Esta acción eliminará todos los campos y no se puede deshacer.")) {
+        localStorage.clear();
+        window.location.reload();
+    }
 }
 
 //BOTONES PARA OCULTAR FILAS------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -655,18 +657,20 @@ var SunbedController = function() {
         },
 
         reset_local_storage_except_customers: function () {           
-    Object.keys(localStorage).forEach(function (local_key) {
-        // Solo eliminar si NO es customer_name y NO es visibilidad de fila o zona libre
-        if (
-            !local_key.includes('customer_name') &&
-            !local_key.includes('Visibility')
-        ) {
-            localStorage.removeItem(local_key);
-        }
-    });
+            if (confirm("¿Estás seguro de que deseas borrar todos los colores y el registro total de la calculadora? Esta acción no se puede deshacer.")) {
+                Object.keys(localStorage).forEach(function (local_key) {
+                    // Solo eliminar si NO es customer_name y NO es visibilidad de fila o zona libre
+                    if (
+                        !local_key.includes('customer_name') &&
+                        !local_key.includes('Visibility')
+                    ) {
+                        localStorage.removeItem(local_key);
+                    }
+                });
 
-    window.location.reload();
-},
+                window.location.reload();
+            }
+        },
 
 
 
@@ -704,7 +708,6 @@ function calcularCambio() {
   const hamaca = document.getElementById('hamaca').value;
   const totalSelect = parseFloat(document.getElementById('totalSelect').value);
   const totalManual = parseFloat(document.getElementById('totalManual').value);
-  const recibidoSelect = parseFloat(document.getElementById('recibidoSelect').value);
   const recibidoManual = parseFloat(document.getElementById('recibidoManual').value);
   const metodo = document.getElementById('pago').value;
   const sombrillaExtra = document.getElementById('sombrillaExtra').value;
@@ -721,7 +724,7 @@ function calcularCambio() {
   let cambio = 0;
   
   if (metodo === 'efectivo') {
-    recibido = recibidoManual || recibidoSelect;
+    recibido = recibidoManual;
     if (isNaN(total) || isNaN(recibido)) {
       alert("Por favor, introduce montos válidos.");
       return;
@@ -799,6 +802,14 @@ function calcularCambio() {
     devuelto: ""
   });
   localStorage.setItem("operaciones", JSON.stringify(operaciones));
+
+  // Reiniciar los campos después del cálculo
+  document.getElementById('hamaca').value = '';
+  document.getElementById('totalSelect').selectedIndex = 1; // 16€ 2 hamacas
+  document.getElementById('totalManual').value = '';
+  document.getElementById('recibidoManual').value = '';
+  document.getElementById('pago').selectedIndex = 0; // Efectivo
+  document.getElementById('sombrillaExtra').selectedIndex = 0; // No
 }
 
 function procesarDevolucion() {
@@ -988,7 +999,6 @@ function reiniciarCalculadora() {
   document.getElementById('hamaca').value = '';
   document.getElementById('totalSelect').selectedIndex = 0;
   document.getElementById('totalManual').value = '';
-  document.getElementById('recibidoSelect').selectedIndex = 0;
   document.getElementById('recibidoManual').value = '';
   document.getElementById('pago').selectedIndex = 0;
   document.getElementById('resultado').textContent = '';
